@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from corsheaders.defaults import default_methods
 from pathlib import Path
 import os
 
@@ -41,17 +42,32 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
     'order.apps.OrderConfig',
-    'rest_framework'
+    'collection.apps.CollectionConfig',
+    'recipe.apps.RecipeConfig',
+    'rest_framework',
+    'rest_framework.authtoken',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+
+]
+
+CORS_ALLOW_METHODS = list(default_methods) + [
+    "POKE",
 ]
 
 ROOT_URLCONF = 'BEcommerce.urls'
