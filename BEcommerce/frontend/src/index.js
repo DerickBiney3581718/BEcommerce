@@ -24,7 +24,8 @@ const router = createBrowserRouter([
     { path: '/orders', element: <OrdersPage /> },
     { path: '/show-all', element: <ShowCatPage /> },
     { path: '/recipe/:name', element: <RecipePage /> },
-    { path: '/queue', element: <QueuePage /> }]
+    { path: '/queue', element: <QueuePage /> },
+    { path: '/product/:name', element: <ProductPage />, loader: fetchCategoriesData }]
   }])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

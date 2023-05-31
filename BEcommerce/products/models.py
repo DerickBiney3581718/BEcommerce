@@ -11,6 +11,8 @@ class ProductModel(models.Model):
     descript = models.TextField()
     brand = models.CharField(max_length=250, default=None)
     available = models.BooleanField(default=True)
+    photo = models.ImageField(("photo of product"), upload_to='uploads/',
+                              height_field=None, width_field=None, max_length=None, blank=True)
 
     class Meta:
         verbose_name = ("ProductModel")
@@ -21,3 +23,6 @@ class ProductModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("ProductModel_detail", kwargs={"pk": self.pk})
+
+    def photo_url(self):
+        return self.photo.url

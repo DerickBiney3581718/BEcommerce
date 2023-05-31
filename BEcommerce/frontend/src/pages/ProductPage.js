@@ -1,62 +1,84 @@
-import { Favorite, FavoriteBorder, Remove, Add } from '@mui/icons-material'
-import { Card, CardActions, CardMedia, IconButton, Box, Typography, CardContent, Stack, Button } from '@mui/material'
-import React, { useState } from 'react'
+import { Favorite, FavoriteBorder, Remove, Add, Bookmark, BookmarkOutlined, BookmarkBorder } from '@mui/icons-material'
+import { Card, CardActions, CardMedia, IconButton, Box, Typography, CardContent, Stack, Button, Divider } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { ArrowBack } from '@mui/icons-material'
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
+import CustomChecks from '../components/CustomChecks'
+import { IngList } from '../components/IngList'
+import { DifficultyScale } from '../components/DifficultyScale'
 import CategorySection from '../components/CategorySection'
+import OtherSection from '../components/OtherSection'
+
 
 function ProductPage() {
-    const [fav, setFav] = useState(true)
-    const [inStock, setInStock] = useState(true)
+    const location = useLocation()
+    const [bookmark, setBookmark] = useState(true)
+    const data = useLoaderData()
+    // const [products, setProducts] = useState([])
+    const navigate = useNavigate()
+    const endpoint = `http://localhost:8000/recipes/${location?.state?.id}/products`
+
+    // console.log(location);
+    // useEffect(() => {
+    //     // fetch data
+    //     const fetchUserData = async () => {
+    //         const productsData = await (await fetch(endpoint)).json()
+    //         setProducts(productsData)
+    //     }
+    //     fetchUserData()
+    // }, []);
+
     return (
-        <div>
-            <Card sx={{ height: 400, position: 'relative' }} elevation={false}>
-                <CardMedia component="img"
-                    alt="green iguana"
-                    height={400}
-                    border-radius='5'
-                    image={'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1453&q=80'}
-                />
-                <CardActions sx={{ position: 'absolute', bottom: 0, zIndex: 454 }}>
-                    <IconButton sx={{ color: 'white', borderRadius: 40 }}>
-                        {fav ? <Favorite color='warning' /> : <FavoriteBorder />}
-                    </IconButton>
+        <Box pb={9}>
+            <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }} position={'sticky'}>
+                <IconButton onClick={() => navigate(-1)}>
+                    <ArrowBack />
+                </IconButton>
+            </Box >
+            <Divider />
+
+            <Stack sx={{ px: 1 }} zIndex={57} bgcolor={'white'} alignItems={'center'}  >
+                <Box alignSelf={'flex-start'} py={2}>
+                    <Typography variant='h5' fontWeight={600} lineHeight={1.5}  > {location?.state.name}</Typography>
+                    <Typography variant='subtitle1' color={'biney.gray'} fontWeight={700} lineHeight={1.5}   > brand : {location?.state.brand}</Typography>
+                    <Typography variant='caption' color={location.state.available ? 'success.light' : 'error.light'}> {location.state.available && 'Available'}</Typography>
+
+                </Box>
+
+                <Card sx={{ position: 'relative', borderRadius: 5 }} elevation={0}>
+                    <CardMedia component="img"
+                        alt={location.state.name}
+                        // height={300}
+                        image={location.state.photo_url} />
+
+                </Card>
+                <CardActions sx={{ display: 'flex', alignSelf: 'flex-start', justifyContent: 'space-between', width: 1 }}>
+                    <Stack direction={'row'} >
+                        <Typography fontWeight={600} alignSelf={'center'} variant='caption'>{'GHC '}</Typography>
+
+                        <Typography fontWeight={600} alignSelf={'center'}>{location.state.price}</Typography>
+                    </Stack>
+                    <Stack direction={'row'} alignItems={'center'} >
+                        <IconButton><BookmarkBorder /> </IconButton>
+                        <Typography variant='caption' fontWeight={600}>Add to wishlist </Typography>
+                    </Stack>
                 </CardActions>
 
-            </Card>
-            <Box>
-                <Typography variant='h5' >GHC 432</Typography>
-                <Typography > nAME Goes HERe --- </Typography>
-                <Typography variant=''> brand name --- </Typography>
+            </Stack>
+            <Divider />
+            <Stack px={2}>
+                <Typography variant='h6' fontWeight={600} >Product Description</Typography>
+                <Box pb={2}>
+                    <Typography color={'biney.gray'} lineHeight={2}>{location.state.descript}</Typography>
+                </Box> </Stack>
+            <Divider />
 
-            </Box>
-            <hr />
-            <Box>
-                <Typography variant='h5' >PRODUCT DESCRIPTION</Typography>
-                <Typography variant=''> Lorem ipsum dolor sit amet consectetur adipisicing elit. Est reprehenderit porro provident culpa, rem dignissimos. A officiis, ullam voluptate recusandae doloremque rerum maiores illo facere explicabo, eaque obcaecati enim libero.</Typography>
-            </Box>
-            <hr />
-            <Box>
-                <Stack justifyContent={'space-between'}>
-                    <Typography color={'success.light'} > In Stock </Typography>
+            <OtherSection items={data.products}>You might like these</OtherSection>
+            <OtherSection items={data.products}>Recipes you can try</OtherSection>
 
-                    <Stack direction={'row'} justifyContent={'space-around'} alignItems={'center'}>
-                        <Typography variant=''>Quantity</Typography>
-                        <IconButton aria-label="minus" size='small'>
-                            <Remove />
-                        </IconButton>
-                        <IconButton aria-label="play/pause" size='small'>
-                            {3}
-                        </IconButton>
-                        <IconButton aria-label="add" size='small' sx={{ bgcolor: 'gray' }}>
-                            <Add />
-                        </IconButton>
-                    </Stack>
-                    <Button sx={{ bgcolor: 'yellow' }}> Add to cart </Button>
-                </Stack>
-            </Box>
-            <hr/>
-            <CategorySection/>
-        </div>
+        </Box >
     )
 }
+
 
 export default ProductPage

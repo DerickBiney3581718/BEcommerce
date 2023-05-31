@@ -61,9 +61,9 @@ class ListRecipesOfCollection2(generics.ListAPIView):
         serializer_class = RecipeSerializer
         model = CollectionModel
         
-        def get_object(self):
-            self.objec = super().get_object()
-            return self.objec
+        # def get_object(self):
+        #     self.objec = super().get_object()
+        #     return self.objec
         
         def get_queryset(self):
             q = CollectionModel.objects.get(id=self.kwargs['pk'])

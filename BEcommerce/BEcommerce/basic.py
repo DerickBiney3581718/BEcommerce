@@ -11,6 +11,6 @@ import requests
 #     headers = {
 #         "Authorization": f"Token {token}"
 #     }
-endpoint = 'http://localhost:8000/collections/1/recipes'
+endpoint = 'http://localhost:8000/products'
 get_response = requests.get(endpoint)
 print(get_response.json())

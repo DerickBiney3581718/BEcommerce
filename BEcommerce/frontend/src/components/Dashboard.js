@@ -18,10 +18,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Dashboard() {
 
-
-  
   return (
-    // <AppBar position="static" color=''>
     <Box sx={{ px: 0 }} zIndex={57} position={'sticky'} top={0} bgcolor={'white'} >
       <Toolbar disableGutters>
 
@@ -43,16 +40,6 @@ function Dashboard() {
         >
           Recipro
         </Typography>
-        {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box> */}
 
         <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
           <Typography>Log in</Typography>
@@ -61,25 +48,7 @@ function Dashboard() {
               <LoginIcon />
             </IconButton>
           </Tooltip>
-          {/* <Menu
-                        sx={{ mt: '45px' }}
-                        id="menu-appbar"
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                    >
-                        {settings.map((setting) => (
-                            <MenuItem key={setting} >
-                                <Typography textAlign="center">{setting}</Typography>
-                            </MenuItem>
-                        ))}
-                    </Menu> */}
+
         </Box>
       </Toolbar>
     </Box>

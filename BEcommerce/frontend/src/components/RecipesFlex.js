@@ -9,12 +9,13 @@ function RecipesFlex({ collection }) {
     const navigate = useNavigate()
     const HandleClick = () => {
         navigate('show-all', { state: recipes })
-      }
+    }
+    // console.log(collection);
     const endpoint = `http://localhost:8000/collections/${collection?.id}/recipes`
 
     useEffect(() => {
         // fetch data
-        const fetchUserData = async () => {
+        const fetchUserData = async () => { 
             const recipesData = await (await fetch(endpoint)).json()
             setRecipes(recipesData)
         }
@@ -23,7 +24,7 @@ function RecipesFlex({ collection }) {
 
     return (
         <>
-           <Box>
+            <Box>
                 <Stack direction={'row'} justifyContent={'space-between'} paddingBottom={2} >
                     <Typography>{collection?.name}</Typography>
                     <Chip sx={{ bgcolor: 'primary.light' }} label='See all' onClick={HandleClick} />
@@ -36,7 +37,7 @@ function RecipesFlex({ collection }) {
                     })}
 
                 </Stack>    </Box>
-            
+
 
         </>
     )

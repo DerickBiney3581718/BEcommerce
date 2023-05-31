@@ -13,14 +13,14 @@ from .serializers import OrderSerializer
 class ListOrders(generics.ListAPIView):
     queryset = OrderModel.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [
-        authentication.SessionAuthentication, authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # authentication_classes = [
+    #     authentication.SessionAuthentication, authentication.TokenAuthentication]
 
 
 class RetrieveOrder(generics.RetrieveAPIView):
     queryset = OrderModel.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [
-        authentication.SessionAuthentication, authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # authentication_classes = [
+    #     authentication.SessionAuthentication, authentication.TokenAuthentication]

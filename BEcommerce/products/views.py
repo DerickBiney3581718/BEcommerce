@@ -12,14 +12,14 @@ from .serializers import ProductSerializer
 class ListProducts(generics.ListAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [
-        authentication.SessionAuthentication, authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # authentication_classes = [
+    #     authentication.SessionAuthentication, authentication.TokenAuthentication]
 
 
 class RetrieveProduct(generics.RetrieveAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes = [
-        authentication.SessionAuthentication, authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # authentication_classes = [
+    #     authentication.SessionAuthentication, authentication.TokenAuthentication]

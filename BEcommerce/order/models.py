@@ -9,14 +9,19 @@ import datetime
 class OrderModel(models.Model):
     # user = models.ForeignKey(User, on_delete=models.PROTECT)
     products = models.ManyToManyField(ProductModel)
-    product_list = models.JSONField(
-        ("list of products"), blank=True, null=True)  # a dictionary of product ids with quantities bought
-    paid = models.BooleanField(default=False)
+    # a dictionary of product ids with quantities bought
+    product_list = models.JSONField(("list of products"), default=dict)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    amount_paid = models.FloatField(("amount paid so far"), default=0)
 
     def __str__(self):
         return f'{self.id}th order'
 
-    def prices_of_products(self):
-        return {int(prod): int(ProductModel.objects.get(
-            id=prod).price) for prod in self.product_list.keys()}
+    def total_sum(self):
+        return sum([ProductModel.objects.get(id=k).price * v for k, v in self.product_list.items()])
+
+    def is_paid(self):
+        return self.amount_paid >= self.total_sum()
+
+    # def receipt():

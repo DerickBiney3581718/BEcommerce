@@ -3,17 +3,19 @@ import Dashboard from '../components/Dashboard'
 import CategorySection from '../components/CategorySection'
 import RecipesFlex from '../components/RecipesFlex'
 import { useLoaderData } from 'react-router-dom'
+import ProductGrid from '../components/ProductGrid'
+import { Box } from '@mui/material'
 
 function LandingPage() {
-    const collections  = useLoaderData()
-    
+    const data = useLoaderData()
+    // console.log(collections);
     return (
-        <>
+        <Box mb={8}>
             <Dashboard />
-            <CategorySection collections={collections} />
-            {collections?.map(collection => <RecipesFlex key={collection.id} collection={collection} />)}
-
-        </>
+            <CategorySection collections={data.collections} />
+            {data.collections?.map(collection => <RecipesFlex key={collection.id} collection={collection} />)}
+            <ProductGrid prodArr={data.products} />
+        </Box>
     )
 }
 

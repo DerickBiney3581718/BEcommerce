@@ -9,24 +9,31 @@ import Receipt from "./components/Receipt";
 import ShowCatPage from "./pages/ShowCatPage";
 import { Outbound } from "@mui/icons-material";
 import { Outlet } from "react-router-dom";
-
+import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      biney: {
+        gray: '#717f94'
+      },
+    },
+    typography: {
+      fontFamily: 'Lato'
+    }
+  })
   return (
-    <div className="App">
-      <Layout>
-        <Outlet/>
-        
-        {/* <LandingPage /> */}
-        {/* <ShowCatPage /> */}
-        {/* <ExplorePage /> */}
-        {/* <CartPage /> */}
-        {/* <OrdersPage/> */}
-        {/* <Receipt/> */}
-      </Layout>
-      <Footer />
-    </div>
+    <ThemeProvider theme={theme} >
+      <div className="App">
+        {/* <CssBaseline/> */}
+        <Layout>
+          <Outlet />
+        </Layout>
+        <Footer />
+      </div>
+
+    </ThemeProvider>
   );
 }
 

@@ -21,8 +21,7 @@ function RecipeCard({ recipe }) {
                 alt="green iguana"
                 height="130"
                 border-radius='5'
-                image={'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1453&q=80'}
-
+                image={recipe?.photo_url}
             />
             <Typography component={'div'} textAlign={'center'} >
                 {recipe?.name}
