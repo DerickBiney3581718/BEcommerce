@@ -11,7 +11,7 @@ import OrdersPage from './pages/OrdersPage';
 import ShowCatPage from './pages/ShowCatPage';
 import ProductPage from './pages/ProductPage';
 import QueuePage from './pages/QueuePage';
-import { fetchCategoriesData } from './loaders'
+import { AllOnBoard, fetchCategoriesData } from './loaders'
 import RecipePage from './pages/RecipePage';
 
 const router = createBrowserRouter([
@@ -20,12 +20,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [{ index: true, element: <LandingPage />, loader: fetchCategoriesData },
     { path: '/cart', element: <CartPage /> },
-    { path: '/explore', element: <ExplorePage /> },
+    { path: '/explore', element: <ExplorePage />, loader: AllOnBoard },
     { path: '/orders', element: <OrdersPage /> },
     { path: '/show-all', element: <ShowCatPage /> },
-    { path: '/recipe/:name', element: <RecipePage /> },
+    { path: '/recipe/:id', element: <RecipePage /> },
     { path: '/queue', element: <QueuePage /> },
-    { path: '/product/:name', element: <ProductPage />, loader: fetchCategoriesData }]
+    { path: '/product/:id', element: <ProductPage/>, loader: fetchCategoriesData }]
   }])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

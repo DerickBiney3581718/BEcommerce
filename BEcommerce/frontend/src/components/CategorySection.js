@@ -1,6 +1,5 @@
 import { Box, Chip, Stack, Typography, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import CollectionCard from './CollectionCard'
 
 function CategorySection({ collections }) {

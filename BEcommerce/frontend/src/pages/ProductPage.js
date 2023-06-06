@@ -16,7 +16,7 @@ function ProductPage() {
     const data = useLoaderData()
     // const [products, setProducts] = useState([])
     const navigate = useNavigate()
-    const endpoint = `http://localhost:8000/recipes/${location?.state?.id}/products`
+    // const endpoint = `http://localhost:8000/recipes/${location?.state?.id}/products`
 
     // console.log(location);
     // useEffect(() => {

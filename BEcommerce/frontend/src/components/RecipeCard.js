@@ -11,7 +11,7 @@ function RecipeCard({ recipe }) {
     // const [fullPage, setFullPage] = useState(false)
     const navigate = useNavigate()
     const HandleClick = () => {
-        navigate(`recipe/${recipe?.name}`, { state: recipe })
+        navigate(`recipe/${recipe?.id}`, { state: recipe })
 
     }
     return (<>

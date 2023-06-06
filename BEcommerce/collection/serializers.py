@@ -5,4 +5,4 @@ from . import models
 class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CollectionModel
-        fields = ('id', 'name', 'number_of_recipes', 'recipes', 'descript')
+        fields = ('id', 'name', 'number_of_recipes', 'recipes', 'descript','photo_url')

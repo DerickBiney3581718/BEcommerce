@@ -16,29 +16,20 @@ function CollectionCard({  collection}) {
     //     navigate(`recipe/${collection?.name}`, { state: collection })
 
     // }
+    console.log(collection);
     return (<>
         <Card sx={{ width: 160, height: 160 }} >
             <CardMedia
                 component="img"
-                alt="green iguana"
+                alt={collection.name}
                 height="130"
                 border-radius='5'
-                image={'https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1453&q=80'}
-
-            />
+                image={collection.photo_url}    />
             {/* <CardContent > */}
             <Typography component={'div'} textAlign={'center'} >
                 {collection?.name}
             </Typography >
-            {/* <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
-                </Typography> */}
-            {/* </CardContent> */}
-            {/* <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-            </CardActions> */}
+
         </Card>
     </>
 
