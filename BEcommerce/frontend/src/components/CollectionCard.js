@@ -6,19 +6,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-import RecipePage from '../pages/RecipePage';
 // import {cardImage} from 'frontend/public/images/Turkey Tenderloin Is a Quick Solution to a Small Thanksgiving.jpeg'
 
 function CollectionCard({  collection}) {
     const [fullPage, setFullPage] = useState(false)
     const navigate = useNavigate()
-    // const HandleClick = () => {
-    //     navigate(`recipe/${collection?.name}`, { state: collection })
+    const HandleClick = () => {
+        navigate(`/collection/${collection?.id}`, { state: collection })
 
-    // }
-    console.log(collection);
+    }
+    // console.log(collection);
     return (<>
-        <Card sx={{ width: 160, height: 160 }} >
+        <Card sx={{ width: 160, height: 160 }} onClick={HandleClick} >
             <CardMedia
                 component="img"
                 alt={collection.name}

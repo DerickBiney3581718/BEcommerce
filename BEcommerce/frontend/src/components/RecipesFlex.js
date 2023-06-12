@@ -8,7 +8,7 @@ function RecipesFlex({ collection }) {
     const [recipes, setRecipes] = useState([])
     const navigate = useNavigate()
     const HandleClick = () => {
-        navigate('show-all', { state: recipes })
+        navigate('show-all-recipes', { state: recipes })
     }
     // console.log(collection);
     const endpoint = `http://localhost:8000/collections/${collection?.id}/recipes`
@@ -23,7 +23,7 @@ function RecipesFlex({ collection }) {
     }, []);
 
     return (
-        <>
+        <> 
             <Box>
                 <Stack direction={'row'} justifyContent={'space-between'} paddingBottom={2} >
                     <Typography>{collection?.name}</Typography>

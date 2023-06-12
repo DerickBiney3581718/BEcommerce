@@ -57,15 +57,28 @@ class ListRecipesOfCollection(APIView):
         context["list_of_collections"] = CollectionModel.objects.all()
         return context
 
+
 class ListRecipesOfCollection2(generics.ListAPIView):
-        serializer_class = RecipeSerializer
-        model = CollectionModel
-        
-        # def get_object(self):
-        #     self.objec = super().get_object()
-        #     return self.objec
-        
-        def get_queryset(self):
-            q = CollectionModel.objects.get(id=self.kwargs['pk'])
-            # print(self.objec)
-            return q.recipes.all()
+    serializer_class = RecipeSerializer
+    model = CollectionModel
+
+    # def get_object(self):
+    #     self.objec = super().get_object()
+    #     return self.objec
+
+    def get_queryset(self):
+        q = CollectionModel.objects.get(id=self.kwargs['pk'])
+        # print(self.objec)
+        return q.recipes.all()
+
+
+class ListOfFilteredCollections(generics.ListAPIView):
+    serializer_class = CollectionSerializer
+    model = CollectionModel
+
+    def get_queryset(self):
+        q = CollectionModel.objects.filter(
+            descript__contains=self.kwargs['keyword'])
+        print(self.kwargs, q)
+
+        return q

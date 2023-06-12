@@ -12,7 +12,7 @@ class OrderModel(models.Model):
     # a dictionary of product ids with quantities bought
     product_list = models.JSONField(("list of products"), default=dict)
     timestamp = models.DateTimeField(auto_now_add=True)
-
+    paid = models.BooleanField(("is paid for"), default=False)
     amount_paid = models.FloatField(("amount paid so far"), default=0)
 
     def __str__(self):
@@ -22,6 +22,10 @@ class OrderModel(models.Model):
         return sum([ProductModel.objects.get(id=k).price * v for k, v in self.product_list.items()])
 
     def is_paid(self):
+        self.paid = self.amount_paid >= self.total_sum()
         return self.amount_paid >= self.total_sum()
-
+    
+    # def save(*args, **kwargs):
+    #     save.super(*args, **kwargs)
+    #     self.paid.update(self.is_paid)
     # def receipt():

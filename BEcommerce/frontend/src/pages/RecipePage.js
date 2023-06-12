@@ -16,7 +16,7 @@ function RecipePage() {
     const navigate = useNavigate()
     const endpoint = `http://localhost:8000/recipes/${location?.state?.id}/products`
 
-    console.log(location);
+    // console.log(location);
     useEffect(() => {
         // fetch data
         const fetchUserData = async () => {

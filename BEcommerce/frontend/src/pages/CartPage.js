@@ -1,15 +1,18 @@
 import { Box, Button, Divider, Stack, Typography } from '@mui/material'
-import React from 'react'
+import  { useState } from 'react'
 import CartCard from '../components/CartCard'
 import { Link } from 'react-router-dom'
 
 function CartPage() {
+    const [quantities, setQuantities] = useState({})
+
+    const product = {'id': '1', 'name': 'blender', 'price': '400.00', 'descript': 'durable and affordable from the German Chef', 'brand': 'German Chef', 'available': true, 'photo_url': '/media/uploads/german_chef_blender.jpeg'}
     return (
         <>
             <Stack spacing={1}>
-                <CartCard />
-                <CartCard />
-                <CartCard />
+                <CartCard product={product} />
+                <CartCard product={product} />
+                <CartCard product={product} />
             </Stack>
             <Divider />
             <Stack direction={'row'} justifyContent={'space-between'}>

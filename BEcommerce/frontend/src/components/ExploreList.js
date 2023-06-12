@@ -1,19 +1,21 @@
-import { List, ListItem, ListItemButton } from '@mui/material'
-import React from 'react'
+import { List, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
-export const ExploreList = ({ arr }) => {
+export const ExploreList = ({ items }) => {
+    const navigate = useNavigate()
+    console.log('the it ems slsj', items)
+    const HandleClick = (item) => {
+        navigate(`/product/${item.id}`, { state: item })
+    }
+
     return (
         <List>
-            {arr.map(item => {
-                <ListItem disablePadding>
-                <ListItemButton>
-                    <ListItemAvatar>
-                        <InboxIcon />
-                    </ListItemAvatar>
-                    <ListItemText primary="Inbox" />
+            {items?.map(item => <ListItem disablePadding key={item.id} onClick={() => HandleClick(item)}>
+                <ListItemButton >
+                    <ListItemText primary={item.name} />
                 </ListItemButton>
-            </ListItem>
-            })
-            }</List>
+            </ListItem>)}
+
+        </List>
     )
 }

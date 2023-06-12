@@ -11,21 +11,27 @@ import OrdersPage from './pages/OrdersPage';
 import ShowCatPage from './pages/ShowCatPage';
 import ProductPage from './pages/ProductPage';
 import QueuePage from './pages/QueuePage';
-import { AllOnBoard, fetchCategoriesData } from './loaders'
+import CollectionPage from './pages/CollectionPage';
+import { AllOnBoard, AllOrders, fetchCategoriesData } from './loaders'
 import RecipePage from './pages/RecipePage';
+import ShowAllPage from './pages/ShowAllPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [{ index: true, element: <LandingPage />, loader: fetchCategoriesData },
-    { path: '/cart', element: <CartPage /> },
+    { path: '/cart', element: <CartPage />,loader: AllOrders },
     { path: '/explore', element: <ExplorePage />, loader: AllOnBoard },
     { path: '/orders', element: <OrdersPage /> },
-    { path: '/show-all', element: <ShowCatPage /> },
+    { path: '/show-all-recipes', element: <ShowCatPage /> },
+    { path: '/show-all', element: <ShowAllPage /> },
+
     { path: '/recipe/:id', element: <RecipePage /> },
     { path: '/queue', element: <QueuePage /> },
-    { path: '/product/:id', element: <ProductPage/>, loader: fetchCategoriesData }]
+    { path: '/product/:id', element: <ProductPage/>, loader: fetchCategoriesData },
+    { path: '/collection/:id', element: <CollectionPage/>  }]
+  
   }])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

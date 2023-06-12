@@ -13,7 +13,7 @@ function ProductCard({ prod }) {
     }
 
     return (<>
-        <Card sx={{ width: 200, height: 190 }} onClick={HandleClick}>
+        <Card sx={{ width: 180, height: 190 }} onClick={HandleClick}>
             <CardMedia
                 component="img"
                 alt={prod.name + ' ' + prod.brand}

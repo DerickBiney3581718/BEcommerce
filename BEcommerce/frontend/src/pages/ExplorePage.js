@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { Search } from '@mui/icons-material';
 import { Autocomplete, TextField, InputAdornment, lighten, darken, FormControl } from '@mui/material'
 import React from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import { ExploreList } from '../components/ExploreList';
 
 const GroupHeader = styled('div')(({ theme }) => ({
     position: 'sticky',
@@ -19,21 +21,34 @@ const GroupItems = styled('ul')({
     padding: 0,
 });
 function ExplorePage() {
+    const [items, setItems] = useState([])
     const data = useLoaderData()
-   const navigate =  useNavigate()
+    console.log(data);
+    const navigate = useNavigate()
     const allOptions = [];
     (function () {
         for (const [nom, arr] of Object.entries(data)) {
             arr.map(item => allOptions.push({ 'status': String(nom), ...item }))
         }
+        data?.product?.forEach(item => {
+            allOptions.push({ 'status': 'brand', 'name': item.brand, ...allOptions })
+        }
+        )
+
     })(data)
 
     console.log(allOptions);
     const findPage = (e) => {
-
-     const id =  allOptions.findIndex(item => item.name === e.target.value)
-
-        navigate(`/${allOptions[id].status}/${allOptions[id].id}`, {state:allOptions[id]})
+        const id = allOptions[allOptions.findIndex(item => item.name === e.target.value)].id
+        if (id !== undefined) {
+            console.log(id);
+            navigate(`/${allOptions[id].status}/${allOptions[id].id}`, { state: allOptions[id] })
+        }
+        else {
+            const brandList = allOptions.filter(item => item.brand === e.target.value)
+            console.log(brandList)
+            setItems([...brandList])
+        }
 
     }
     // Handlers
@@ -61,6 +76,8 @@ function ExplorePage() {
                     </li>
                 )}
             />
+            {items && <ExploreList items={items} />
+            }
             {/* <Autocomplete
                 id="free-solo-demo"
                 freeSolo

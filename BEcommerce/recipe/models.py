@@ -19,6 +19,7 @@ class RecipeModel(models.Model):
     ingredients = models.JSONField(("ingredients"), default=list)
     recipe_book = models.TextField()
     date_added = models.DateTimeField(default=now)
+    keywords =  models.JSONField(("keywords"), default=list)
 
     def __str__(self):
         return f'{self.name} from {self.origin} contains {self.calories_ps} added {self.date_added}'
