@@ -17,10 +17,24 @@ class ListOrders(generics.ListAPIView):
     # authentication_classes = [
     #     authentication.SessionAuthentication, authentication.TokenAuthentication]
 
-
-class RetrieveOrder(generics.RetrieveAPIView):
+class RetrieveOrder(generics.RetrieveUpdateDestroyAPIView):
     queryset = OrderModel.objects.all()
     serializer_class = OrderSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # authentication_classes = [
     #     authentication.SessionAuthentication, authentication.TokenAuthentication]
+
+
+class RetrieveLastOrder(generics.ListAPIView):
+    queryset = OrderModel.objects.all()
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        q = OrderModel.objects.latest("timestamp")
+        print(q)
+        return [q]
+
+
+# class ModifyLastOrder(generics.UpdateAPIView):
+#     queryset = OrderModel.objects.all()
+#     serializer_class = OrderSerializer

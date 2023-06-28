@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const ExploreList = ({ items }) => {
     const navigate = useNavigate()
-    console.log('the it ems slsj', items)
+    console.log('explore list', items)
     const HandleClick = (item) => {
         navigate(`/product/${item.id}`, { state: item })
     }

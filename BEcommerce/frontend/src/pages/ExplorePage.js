@@ -30,8 +30,8 @@ function ExplorePage() {
         for (const [nom, arr] of Object.entries(data)) {
             arr.map(item => allOptions.push({ 'status': String(nom), ...item }))
         }
-        data?.product?.forEach(item => {
-            allOptions.push({ 'status': 'brand', 'name': item.brand, ...allOptions })
+        data?.product.forEach(item => {
+            allOptions.push({ 'status': 'brand', 'name': item.brand})
         }
         )
 
@@ -39,10 +39,10 @@ function ExplorePage() {
 
     console.log(allOptions);
     const findPage = (e) => {
-        const id = allOptions[allOptions.findIndex(item => item.name === e.target.value)].id
-        if (id !== undefined) {
-            console.log(id);
-            navigate(`/${allOptions[id].status}/${allOptions[id].id}`, { state: allOptions[id] })
+        const item = allOptions[allOptions.findIndex(item => item.name === e.target.value)]
+        if (item !== undefined && item.status !== 'brand') {
+            console.log(item, item.id);
+            navigate(`/${item.status}/${item.id}`, { state: item })
         }
         else {
             const brandList = allOptions.filter(item => item.brand === e.target.value)
@@ -52,7 +52,7 @@ function ExplorePage() {
 
     }
     // Handlers
-    const HandleSubmit = (e) => { e.key === 'Enter' ? console.log(findPage(e)) : console.log(e) }
+    const HandleSubmit = (e) => { e.key === 'Enter' ? console.log(findPage(e)) : console.log(e.target.value) }
 
     return (
         <>

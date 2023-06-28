@@ -5,5 +5,5 @@ from . import models
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.OrderModel
-        fields = ('products', 'product_list', 'timestamp', 'paid',
+        fields = ('id', 'products', 'product_list', 'timestamp', 'paid',
                   'amount_paid', 'total_sum', 'is_paid')

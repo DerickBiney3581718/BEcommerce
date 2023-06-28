@@ -23,3 +23,12 @@ class RetrieveProduct(generics.RetrieveAPIView):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # authentication_classes = [
     #     authentication.SessionAuthentication, authentication.TokenAuthentication]
+
+
+class ListFilteredSubset(generics.ListAPIView):
+    queryset = ProductModel
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        q = ProductModel.objects.filter(pk__in=self.kwargs['subset'])
+        return q

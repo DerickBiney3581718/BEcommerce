@@ -2,7 +2,9 @@
 const categoriesEndpoint = 'http://localhost:8000/collections/'
 const productsEndpoint = 'http://localhost:8000/products/'
 const recipesEndpoint = 'http://localhost:8000/recipes/'
-const cartEndpoint = 'http://localhost:8000/orders/'
+const historyEndpoint = 'http://localhost:8000/orders/'
+const cartEndpoint = 'http://localhost:8000/orders/current/'
+
 export const fetchCategoriesData = async () => {
     const collections = await (await fetch(categoriesEndpoint)).json()
     const products = await (await fetch(productsEndpoint)).json()
@@ -19,6 +21,10 @@ export const AllOnBoard = async () => {
 }
 
 export const AllOrders = async ()=>{
-    const orders = await(await fetch(cartEndpoint)).json()
+    const orders = await(await fetch(historyEndpoint)).json()
     return orders
+}
+export const cartOrder = async ()=>{
+    const cart = await(await fetch(cartEndpoint)).json()
+    return cart
 }
