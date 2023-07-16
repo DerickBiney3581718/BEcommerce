@@ -1,22 +1,49 @@
-export default function CartReducer(quantities, action) {
+export default function CartReducer(cart, action) {
     switch (action.type) {
+        case "added":
+            {
+                const newQuantities = {
+                    ...cart,
+                    product_list: {
+                        ...cart.product_list,
+                        [action.id]: 1
+                    }
+                }
+                return { ...newQuantities }
+            }
         case 'deleted':
             {
-                const newQuantities = { ...quantities }
-                newQuantities[action.id] = 0
+                const newQuantities = {
+                    ...cart,
+                    product_list: {
+                        ...cart.product_list,
+                        [action.id]: 0
+                    }
+                }
                 return { ...newQuantities }
-
             }
         case 'increase_quantity':
             {
-                const newQuantities = { ...quantities }
-                newQuantities[action.id] += 1
-                return { ...newQuantities }
+                const newQuantities = {
+                    ...cart,
+                    product_list: {
+                        ...cart.product_list,
+                        [action.id]: cart.product_list[action.id] + 1
+                    }
+                }
+                return {
+                    ...newQuantities,
+                }
             }
         case 'decrease_quantity':
             {
-                const newQuantities = { ...quantities }
-                newQuantities[action.id] -= 1
+                const newQuantities = {
+                    ...cart,
+                    product_list: {
+                        ...cart.product_list,
+                        [action.id]: cart.product_list[action.id]--
+                    }
+                }
                 return { ...newQuantities }
             }
         default: {

@@ -9,7 +9,7 @@ function ProductCard({ prod }) {
     // const [fullPage, setFullPage] = useState(false)
     const navigate = useNavigate()
     const HandleClick = () => {
-        navigate(`product/${prod?.id}`, { state: prod })
+        navigate(`/product/${prod?.id}`, { state: prod})
     }
 
     return (<>

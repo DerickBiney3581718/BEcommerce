@@ -23,7 +23,7 @@ const GroupItems = styled('ul')({
 function ExplorePage() {
     const [items, setItems] = useState([])
     const data = useLoaderData()
-    console.log(data);
+    // console.log(data);
     const navigate = useNavigate()
     const allOptions = [];
     (function () {
@@ -37,16 +37,16 @@ function ExplorePage() {
 
     })(data)
 
-    console.log(allOptions);
+    // console.log(allOptions);
     const findPage = (e) => {
         const item = allOptions[allOptions.findIndex(item => item.name === e.target.value)]
         if (item !== undefined && item.status !== 'brand') {
-            console.log(item, item.id);
+            // console.log(item, item.id);
             navigate(`/${item.status}/${item.id}`, { state: item })
         }
         else {
             const brandList = allOptions.filter(item => item.brand === e.target.value)
-            console.log(brandList)
+            // console.log(brandList)
             setItems([...brandList])
         }
 

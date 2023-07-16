@@ -3,11 +3,10 @@ import { Typography, Box, Stack, TextField, InputAdornment, Button, List } from 
 import React from 'react'
 import OrderCard from '../components/OrderCard'
 import { useLoaderData } from 'react-router-dom'
-import { useEffect } from 'react'
 function OrdersPage() {
     const data = useLoaderData()
- 
-    console.log(data);
+
+    // console.log(data);
     return (
         <>
             <Box zIndex={222} position={'sticky'} top={0} bgcolor={'white'}> <Typography component={'div'} variant='h4' p={2}>Your Orders</Typography>
@@ -24,11 +23,13 @@ function OrdersPage() {
                 </Stack>
             </Box>
 
-            <List >
-                {data.map(item=> <OrderCard item={item}/>)}
+            <List>
+                {data.map(item => <OrderCard cart={item} key={item.id} />)}
             </List>
         </>
     )
 }
+
+
 
 export default OrdersPage

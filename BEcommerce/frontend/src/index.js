@@ -17,14 +17,13 @@ import RecipePage from './pages/RecipePage';
 import ShowAllPage from './pages/ShowAllPage';
 import Checkout from './pages/CheckoutPages';
 import Review from './pages/Review';
-import { CartProvider } from './CartContext';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />, loader:cartOrder,
-    children: [{ index: true, element: <LandingPage />, loader: fetchCategoriesData },
-    { path: '/cart', element: <CartPage />, loader: cartOrder },
+    children: [{ index: true, element: <LandingPage />, },
+    { path: '/cart', element: <CartPage /> },
     { path: '/explore', element: <ExplorePage />, loader: AllOnBoard },
     { path: '/orders', element: <OrdersPage />, loader:AllOrders },
     { path: '/show-all-recipes', element: <ShowCatPage /> },

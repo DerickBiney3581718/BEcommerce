@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import ProductCard from './ProductCard';
 import { Typography } from '@mui/material';
+import { useProductsPoco } from '../Hooks/FetchHooks';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -14,19 +15,58 @@ import { Typography } from '@mui/material';
 // }));
 
 export default function ProductGrid({ prodArr }) {
+    const {
+        data,
+        error,
+        fetchNextPage,
+        hasNextPage,
+        isFetching,
+        isFetchingNextPage,
+        status,
+      } = useProductsPoco()
 
-    return (
+      return status === 'loading' ? (
+        <p>Loading...</p>
+      ) : status === 'error' ? (
+        <p>Error: {error.message}</p>
+      ) : (
         <Box sx={{ flexGrow: 1,my:2 }}>
-            <Typography py={2} >Discover products</Typography>
-            <Grid container rowSpacing={2}>
-                {prodArr.map(prod => {
-                    return (<Grid item xs key={prod.id}>
-                        <ProductCard prod={prod} />
-                    </Grid>)
-                })}
-
+          {data.pages.map((group, i) => (
+            <Grid container rowSpacing={2} key={i}>
+              {group.data.map((prod) => (
+                <Grid item xs  key={prod.id}>
+                    <ProductCard prod={prod} />
+                    </Grid>
+              ))}
             </Grid>
-        </Box>
-    );
+          ))}
+          <div>
+            <button
+              onClick={() => fetchNextPage()}
+              disabled={!hasNextPage || isFetchingNextPage}
+            >
+              {isFetchingNextPage
+                ? 'Loading more...'
+                : hasNextPage
+                ? 'Load More'
+                : 'Nothing more to load'}
+            </button>
+          </div>
+          <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
+        </Box>)
+    // return (
+    //     <Box sx={{ flexGrow: 1,my:2 }}>
+    //         <Typography py={2} >Discover products</Typography>
+    //         <Grid container rowSpacing={2}>
+    //             {prodArr?.map(prod => {
+    //                 return (<Grid item xs key={prod.id}>
+    //                     <ProductCard prod={prod} />
+    //                 </Grid>)
+    //             })}
+
+    //         </Grid>
+    //     </Box>
+    // );
+
 }
 

@@ -2,6 +2,7 @@ import { Box, Chip, Divider, Grid, Stack, Typography } from '@mui/material'
 import React from 'react'
 import RecipeCard from './RecipeCard'
 import { useNavigate } from 'react-router-dom'
+import ProductCard from './ProductCard'
 
 const OtherSection = ({ items, children }) => {
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ const OtherSection = ({ items, children }) => {
             <Stack direction={'row'} spacing={1} sx={{ overflowY: 'hidden', height: 200, overflowX: 'scroll', scrollbarWidth: 'none' }}>
                 {items?.map(item => {
                     return (<Grid item key={item.id}  >
-                        <RecipeCard recipe={item}  ></RecipeCard>
+                        <ProductCard prod={item}  ></ProductCard>
                     </Grid>)
                 })}
 

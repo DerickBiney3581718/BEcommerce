@@ -1,4 +1,5 @@
 
+import axios from "axios"
 const categoriesEndpoint = 'http://localhost:8000/collections/'
 const productsEndpoint = 'http://localhost:8000/products/'
 const recipesEndpoint = 'http://localhost:8000/recipes/'
@@ -25,6 +26,6 @@ export const AllOrders = async ()=>{
     return orders
 }
 export const cartOrder = async ()=>{
-    const cart = await(await fetch(cartEndpoint)).json()
+    const cart = (await axios.get(cartEndpoint)).data
     return cart
 }

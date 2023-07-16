@@ -12,7 +12,3 @@ export const useCart = () => {
 export const useCartDispatch = () =>{
     return useContext(CartDispatcherContext)
 }
-// TODO: THE REDUCER FUNCTION
-
-
-

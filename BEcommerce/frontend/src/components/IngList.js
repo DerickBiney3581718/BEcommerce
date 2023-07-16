@@ -1,15 +1,22 @@
-import { List, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import React from 'react'
 
-export const IngList = ({items}) => {
+export const IngList = ({ items }) => {
+    // console.log(items, "<-- from ingredients list comp");
     return (
         <List>
-            {items?.map(item => <ListItem disablePadding key={item}>
-                <ListItemButton >
-                    <ListItemText primary={item} />
-                </ListItemButton>
-            </ListItem>)}
+            {items?.map((item, i) => <>
+                <ListItem disablePadding key={i}>
 
-        </List>
+                    <ListItemButton key={item} >
+                        <ListItemText primary={`Step ${i + 1}`} secondary={item} key={item} />
+                    </ListItemButton>
+                </ListItem>              
+                <Divider  component="li" />
+                </>
+                )}
+
+
+            </List >
     )
-}
+            }
