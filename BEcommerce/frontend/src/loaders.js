@@ -26,6 +26,7 @@ export const AllOrders = async ()=>{
     return orders
 }
 export const cartOrder = async ()=>{
-    const cart = (await axios.get(cartEndpoint)).data
+    const cart = (await axios.get(cartEndpoint)).data.results
+    // console.log(cart);
     return cart
 }

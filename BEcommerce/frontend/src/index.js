@@ -12,7 +12,7 @@ import ShowCatPage from './pages/ShowCatPage';
 import ProductPage from './pages/ProductPage';
 import QueuePage from './pages/QueuePage';
 import CollectionPage from './pages/CollectionPage';
-import { AllOnBoard, AllOrders, cartOrder, fetchCategoriesData } from './loaders'
+import {  cartOrder, fetchCategoriesData } from './loaders'
 import RecipePage from './pages/RecipePage';
 import ShowAllPage from './pages/ShowAllPage';
 import Checkout from './pages/CheckoutPages';
@@ -24,16 +24,16 @@ const router = createBrowserRouter([
     element: <App />, loader:cartOrder,
     children: [{ index: true, element: <LandingPage />, },
     { path: '/cart', element: <CartPage /> },
-    { path: '/explore', element: <ExplorePage />, loader: AllOnBoard },
-    { path: '/orders', element: <OrdersPage />, loader:AllOrders },
+    { path: '/explore', element: <ExplorePage />, },
+    { path: '/orders', element: <OrdersPage />,  },
     { path: '/show-all-recipes', element: <ShowCatPage /> },
     { path: '/show-all', element: <ShowAllPage /> },
     { path: 'checkout', element: <Checkout /> },
-    { path: '/recipe/:id', element: <RecipePage /> },
+    { path: '/recipes/:id', element: <RecipePage /> },
     {path: 'receipt', element:<Review/>},
     { path: '/queue', element: <QueuePage /> },
-    { path: '/product/:id', element: <ProductPage />, loader: fetchCategoriesData },
-    { path: '/collection/:id', element: <CollectionPage /> }]
+    { path: '/products/:id', element: <ProductPage />, loader: fetchCategoriesData },
+    { path: '/categories/:id', element: <CollectionPage /> }]
 
   }])
 const root = ReactDOM.createRoot(document.getElementById('root'));

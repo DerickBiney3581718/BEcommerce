@@ -1,12 +1,12 @@
 import { Search, SortRounded } from '@mui/icons-material'
 import { Typography, Box, Stack, TextField, InputAdornment, Button, List } from '@mui/material'
-import React from 'react'
 import OrderCard from '../components/OrderCard'
-import { useLoaderData } from 'react-router-dom'
-function OrdersPage() {
-    const data = useLoaderData()
+import { useAllOrders } from '../Hooks/FetchHooks'
 
-    // console.log(data);
+/////////////////////////////////////////////////////////////////
+function OrdersPage() {
+    const {data: orders} = useAllOrders()  //?query orders?
+    console.log(orders?.data.results);  
     return (
         <>
             <Box zIndex={222} position={'sticky'} top={0} bgcolor={'white'}> <Typography component={'div'} variant='h4' p={2}>Your Orders</Typography>
@@ -24,7 +24,7 @@ function OrdersPage() {
             </Box>
 
             <List>
-                {data.map(item => <OrderCard cart={item} key={item.id} />)}
+                {orders?.data.results.map(item => <OrderCard cart={item} key={item.id} />)}
             </List>
         </>
     )

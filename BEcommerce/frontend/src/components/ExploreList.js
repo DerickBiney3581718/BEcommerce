@@ -5,7 +5,7 @@ export const ExploreList = ({ items }) => {
     const navigate = useNavigate()
     console.log('explore list', items)
     const HandleClick = (item) => {
-        navigate(`/product/${item.id}`, { state: item })
+        navigate(`/products/${item.id}`, { state: item })
     }
 
     return (

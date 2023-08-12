@@ -1,6 +1,5 @@
-import { Box, ButtonGroup, Card, CardContent, CardMedia, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Stack, Typography } from '@mui/material'
 import React from 'react'
-import { useCartDispatch } from '../CartContext'
 import Quantitizer from './Quantitizer';
 
 export default function CartMiniCard({product,quantities}) {

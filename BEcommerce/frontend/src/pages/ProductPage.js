@@ -1,12 +1,8 @@
-import { Favorite, FavoriteBorder, Remove, Add, Bookmark, BookmarkOutlined, BookmarkBorder, BookmarkAdded } from '@mui/icons-material'
-import { Card, CardActions, CardMedia, IconButton, Box, Typography, CardContent, Stack, Button, Divider } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import { BookmarkBorder, BookmarkAdded } from '@mui/icons-material'
+import { Card, CardActions, CardMedia, IconButton, Box, Typography, Stack, Button, Divider } from '@mui/material'
+import React, { useState, } from 'react'
 import { ArrowBack } from '@mui/icons-material'
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
-import CustomChecks from '../components/CustomChecks'
-import { IngList } from '../components/IngList'
-import { DifficultyScale } from '../components/DifficultyScale'
-import CategorySection from '../components/CategorySection'
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom'
 import OtherSection from '../components/OtherSection'
 import ProductsPopup from '../components/ProductsPopup'
 import CartMiniCard from '../components/CartMiniCard'
@@ -18,11 +14,12 @@ function ProductPage() {
     const [openDialog, setOpenDialog] = useState(false)
     const [bookmark, setBookmark] = useState(true)
     const [CheckAlert, setCheckAlert] = useState(false)
-
+    
+    console.log(CheckAlert)
     const data = useLoaderData()
     const product = location?.state
-    console.log("data loaded", data, "\nlocation from useloc", location)
     const navigate = useNavigate()
+    console.log(data)
     const HandleCartAdd = () => {
         setAdd({ [product.id]: 1 })
         setOpenDialog(true)
@@ -55,7 +52,7 @@ function ProductPage() {
                         alt={product.name}
                         // height={300}
                         image={product.photo_url} />
-                    <Button variant='contained' color='success' sx={{ borderRadius: 5, position:"absolute", bottom:5, left: 3 }} onClick={HandleCartAdd} >Add to cart </Button>
+                    <Button variant='contained' color='success' sx={{ borderRadius: 5, position: "absolute", bottom: 5, left: 3 }} onClick={HandleCartAdd} >Add to cart </Button>
 
                 </Card>
                 <CardActions sx={{ display: 'flex', alignSelf: 'flex-start', justifyContent: 'space-between', width: 1 }}>
@@ -65,9 +62,9 @@ function ProductPage() {
                         <Typography fontWeight={600} alignSelf={'center'}>{product.price}</Typography>
                     </Stack>
                     <Stack direction={'row'} alignItems={'center'} >
-                        <IconButton onClick={()=> setBookmark(!bookmark)}>
-                        {bookmark ? <BookmarkBorder /> :  <BookmarkAdded color='warning' /> }
-                             </IconButton>
+                        <IconButton onClick={() => setBookmark(!bookmark)}>
+                            {bookmark ? <BookmarkBorder /> : <BookmarkAdded color='warning' />}
+                        </IconButton>
                         <Typography variant='caption' fontWeight={600}>Add to wishlist </Typography>
                     </Stack>
                 </CardActions>
@@ -81,8 +78,8 @@ function ProductPage() {
                 </Box> </Stack>
             <Divider />
 
-            <OtherSection items={data.products}>You might like these</OtherSection>
-            <OtherSection items={data.products}>Recipes you can try</OtherSection>
+            <OtherSection items={data.products.results}>You might like these</OtherSection>
+            <OtherSection items={data.products.results}>Recipes you can try</OtherSection>
             <ProductsPopup title={"Add to cart"} openDialog={openDialog} setOpenDialog={setOpenDialog}>
                 <Stack direction={'column'} >
                     <CartMiniCard product={product} quantities={add} key={product.id} />

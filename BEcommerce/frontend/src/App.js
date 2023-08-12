@@ -9,9 +9,12 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import CartReducer from "./CartReducer";
 
 const queryClient = new QueryClient()
+
+
 function App() {
   const cartInitial = useLoaderData()
-  // console.log("initial cart in app function",cartInitial);
+  console.log("initial cart in app function",cartInitial);
+
   const [cart, dispatch] = useReducer(CartReducer, cartInitial[0])
   const theme = createTheme({
     palette: {

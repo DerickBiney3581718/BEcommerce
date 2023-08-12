@@ -13,6 +13,7 @@ from .serializers import OrderSerializer
 class ListOrders(generics.ListAPIView):
     queryset = OrderModel.objects.all()
     serializer_class = OrderSerializer
+    # pagination_class = 
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # authentication_classes = [
     #     authentication.SessionAuthentication, authentication.TokenAuthentication]

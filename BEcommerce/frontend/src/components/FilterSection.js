@@ -1,6 +1,4 @@
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import React, { useState } from 'react'
-
 const FilterSection = ({ keyArr, keywords, setKeywords }) => {
     // console.log(keywords)
     const handleKeywords = (event, newFormats) => {

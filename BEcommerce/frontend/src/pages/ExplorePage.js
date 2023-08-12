@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Search } from '@mui/icons-material';
-import { Autocomplete, TextField, InputAdornment, lighten, darken, FormControl } from '@mui/material'
+import { Autocomplete, TextField, InputAdornment, lighten, darken, } from '@mui/material'
 import React from 'react'
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { ExploreList } from '../components/ExploreList';
+import { useAll } from '../Hooks/FetchHooks';
 
 const GroupHeader = styled('div')(({ theme }) => ({
     position: 'sticky',
@@ -20,24 +21,26 @@ const GroupHeader = styled('div')(({ theme }) => ({
 const GroupItems = styled('ul')({
     padding: 0,
 });
+
 function ExplorePage() {
     const [items, setItems] = useState([])
-    const data = useLoaderData()
-    // console.log(data);
+    const data1 = useAll()
+    // console.log("\n from rq", data1);
     const navigate = useNavigate()
     const allOptions = [];
+
     (function () {
-        for (const [nom, arr] of Object.entries(data)) {
-            arr.map(item => allOptions.push({ 'status': String(nom), ...item }))
+        for (const [nom, arr] of Object.entries(data1)) {
+            arr?.data?.results.map(item => allOptions.push({ 'status': String(nom), ...item }))
         }
-        data?.product.forEach(item => {
+        data1?.products?.data.results.forEach(item => {
             allOptions.push({ 'status': 'brand', 'name': item.brand})
         }
         )
 
-    })(data)
+    })(data1)
 
-    // console.log(allOptions);
+    console.log("\n all optons",allOptions);
     const findPage = (e) => {
         const item = allOptions[allOptions.findIndex(item => item.name === e.target.value)]
         if (item !== undefined && item.status !== 'brand') {
@@ -46,7 +49,7 @@ function ExplorePage() {
         }
         else {
             const brandList = allOptions.filter(item => item.brand === e.target.value)
-            // console.log(brandList)
+            console.log(brandList)
             setItems([...brandList])
         }
 
@@ -78,18 +81,6 @@ function ExplorePage() {
             />
             {items && <ExploreList items={items} />
             }
-            {/* <Autocomplete
-                id="free-solo-demo"
-                freeSolo
-                options={allOptions.map((option) => { return option.name + ' ' + (option.brand || '') })}
-                renderInput={(params) => <TextField placeholder='Search recipes,products...' InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <Search />
-                        </InputAdornment>
-                    ),
-                }}  {...params} onSubmit={(e) => HandleSubmit(e)} />}
-            /> */}
 
 
         </>

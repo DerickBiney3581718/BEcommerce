@@ -1,15 +1,10 @@
-import { useState } from 'react'
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 // import {cardImage} from 'frontend/public/images/Turkey Tenderloin Is a Quick Solution to a Small Thanksgiving.jpeg'
 
 function CollectionCard({  collection}) {
-    const [fullPage, setFullPage] = useState(false)
     const navigate = useNavigate()
     const HandleClick = () => {
         navigate(`/collection/${collection?.id}`, { state: collection })

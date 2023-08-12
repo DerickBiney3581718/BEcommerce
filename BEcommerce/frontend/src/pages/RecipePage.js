@@ -1,6 +1,6 @@
-import {  BookmarkAdded, BookmarkBorder, } from '@mui/icons-material'
+import { BookmarkAdded, BookmarkBorder, } from '@mui/icons-material'
 import { Card, CardActions, CardMedia, IconButton, Box, Typography, Stack, Button, Divider } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ArrowBack } from '@mui/icons-material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import CustomChecks from '../components/CustomChecks'
@@ -9,10 +9,11 @@ import ProductsPopup from '../components/ProductsPopup'
 import CartMiniCard from '../components/CartMiniCard'
 import RecipeInstructions from '../components/RecipeInstructions'
 import RecipeIngredients from '../components/RecipeIngredients'
+import { useRecipeProds } from '../Hooks/FetchHooks'
 // import CategorySection from '../components/CategorySection'
 
 function RecipePage() {
-    const location = useLocation()
+    const recipe = useLocation().state
     const [bookmark, setBookmark] = useState(true)
     const [openDialog, setOpenDialog] = useState(false)
     const [setCheckAlert] = useState(false)
@@ -20,20 +21,7 @@ function RecipePage() {
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
     const quantities = {}
-    const recipe = location?.state
-
-    const endpoint = `http://localhost:8000/recipes/${recipe?.id}/products`
-    const fetchUserData = async () => {
-        const productsData = await (await fetch(endpoint)).json()
-        setProducts(productsData)
-        productsData.forEach(item => { quantities[item.id] = 0 })
-        setAdd({ ...quantities })
-    }
-    useEffect(() => {
-        // fetch data
-        fetchUserData()
-    },[]);
-    // console.log("quantities", quantities, "\nadd", add, "\nproducts", products)
+    useRecipeProds({ recipe, setProducts, setAdd, quantities }) 
 
     const HandleCartRedirect = () => {
         const CartNotEmpty = Object.values(add).reduce((acc, val) => acc + val, 0)
@@ -120,6 +108,7 @@ function RecipePage() {
                         if (add[item.id]) {
                             return <CartMiniCard product={item} quantities={add} key={item.id} />
                         }
+                        return undefined;
                     })}
                 </Stack>
             </ProductsPopup>

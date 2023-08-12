@@ -1,51 +1,26 @@
-import { Box, Button, Divider, Stack, Typography } from '@mui/material'
-import { useState, useEffect } from 'react'
+import { Button, Divider, Stack, Typography } from '@mui/material'
+import {  useState, } from 'react'
 import CartCard from '../components/CartCard'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../CartContext'
+import { useSomeProducts } from '../Hooks/FetchHooks'
+import { useMutateCart } from '../Hooks/MutationHooks'
+
 function CartPage() {
     const cart = useCart()
     const loc = useLocation()
     const quantities = cart.product_list
     const [prices, setPrices] = useState([])
-
-    const updateCartEndpoint = `http://localhost:8000/orders/${cart?.id}/`
-    useEffect(() => {
-        const productsEndpoint = `http://localhost:8000/products/${cart?.products?.join('_')}`
-        fetch(productsEndpoint).then(res => res.json()).then(data => {
-            setPrices([...data])
-        })
-    }, [])
-
-    useEffect(() => {
-        // console.log("loc -->",loc)
-        fetch(updateCartEndpoint,
-            {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json', },
-                body: JSON.stringify({
-                    product_list: quantities
-                })
-            }).then(res => res.json()
-            ).then(data => console.log("after loc change data",data))
-    }, [loc])
+    useSomeProducts({ cart, setPrices })
+    const { mutate } = useMutateCart(cart)
+    console.log('loc', loc)
     const subtotal = prices.reduce((acc, product) => acc + (product.price * quantities[product.id] || 0)
         , 0)
-        
+
     //ahndlers
     const HandleClick = () => {
-        console.log(updateCartEndpoint, cart);
-        fetch(updateCartEndpoint,
-            {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json', },
-                body: JSON.stringify({
-                    product_list: quantities
-                })
-            }).then(res => res.json()
-            ).then(data => console.log(data))
+        mutate(quantities)
     }
-
     return (
         <>
             <Stack sx={{ px: 0 }} zIndex={57} position={'sticky'} top={0} bgcolor={'white'}>

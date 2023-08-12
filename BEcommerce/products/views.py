@@ -1,17 +1,15 @@
 
 from django.shortcuts import render
-from rest_framework import generics, permissions, authentication
+from rest_framework import generics, permissions, authentication, pagination
 from .models import ProductModel
 from .serializers import ProductSerializer
 
 # Create your views here.
-#  TODO: SHOW TEMPLATE ACCORDINGLY
-#  TODO: SEND ALL COLLECTIONS
-
 
 class ListProducts(generics.ListAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductSerializer
+    # pagination_class = []
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # authentication_classes = [
     #     authentication.SessionAuthentication, authentication.TokenAuthentication]

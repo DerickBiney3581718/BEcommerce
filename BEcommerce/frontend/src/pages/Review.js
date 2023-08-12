@@ -5,7 +5,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
+import { useSomeProducts } from '../Hooks/FetchHooks';
 
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
@@ -16,26 +17,19 @@ const payments = [
 ];
 
 export default function Review() {
-  const products = useLocation().state
-  const [dataProducts, setDataProducts] = useState([])
-  useEffect(() => {
-    // setQuantities({ ...productData })
-    const productsEndpoint = `http://localhost:8000/products/${products.products.join('_')}`
-    fetch(productsEndpoint).then(res => res.json()).then(data => {
-      // setPrices([...data])
-      setDataProducts([...data])
-    })
-  }, [])
-  console.log(dataProducts);
+  const cart = useLocation().state
+  const [prices, setPrices] = useState([])
+  useSomeProducts({cart, setPrices})
+  console.log(prices);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {dataProducts.map((product) => (
-         (products.product_list[product.id] && <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={products.product_list[product.id]} />
+        {prices.map((product) => (
+          (cart.product_list[product.id] && <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={product.name} secondary={cart.product_list[product.id]} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>) || ''
         ))}
@@ -43,7 +37,7 @@ export default function Review() {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            GHc {products.total_sum}
+            GHc {cart.total_sum}
           </Typography>
         </ListItem>
       </List>

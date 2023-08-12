@@ -4,7 +4,7 @@ import { useProductData } from '../specialLoaders'
 
 function OrderCard({ cart }) {
     const productData = useProductData({cart})
-    // console.log(productData);
+    console.log(productData);
     const navigate = useNavigate()
     const today = Date.now()
     const dateCreated = Date.parse(String(cart.timestamp).split('.').slice(0, -1).join(''))

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Grid, Stack, Box, Typography, Chip } from '@mui/material'
 import RecipeCard from './RecipeCard'
-import ShowCatPage from '../pages/ShowCatPage'
 import { useNavigate } from 'react-router-dom'
+import { useColRecipes } from '../Hooks/FetchHooks'
 
 function RecipesFlex({ collection }) {
     const [recipes, setRecipes] = useState([])
@@ -10,17 +10,7 @@ function RecipesFlex({ collection }) {
     const HandleClick = () => {
         navigate('show-all-recipes', { state: recipes })
     }
-    // console.log(collection);
-    const endpoint = `http://localhost:8000/collections/${collection?.id}/recipes`
-
-    useEffect(() => {
-        // fetch data
-        const fetchUserData = async () => { 
-            const recipesData = await (await fetch(endpoint)).json()
-            setRecipes(recipesData)
-        }
-        fetchUserData()
-    }, []);
+    useColRecipes({collection, setRecipes})
 
     return (
         <> 

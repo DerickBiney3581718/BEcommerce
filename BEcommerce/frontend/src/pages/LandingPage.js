@@ -7,13 +7,13 @@ import { useProdsNCats } from '../Hooks/FetchHooks'
 
 function LandingPage() {
     const {products, categories} = useProdsNCats()
-    console.log("products from rq ", products,"\n categories", categories);
+    console.log("products", categories?.data.results.slice(0,2));
     return (
         <Box mb={8}>
             <Dashboard />
-            <CategorySection collections={categories?.data} />
-            {categories?.data.slice(0,2).map(collection => <RecipesFlex key={collection.id} collection={collection} />)}
-            <ProductGrid prodArr={products?.data} />
+            <CategorySection collections={categories?.data.results} />
+            {categories?.data.results.slice(0,2).map(collection => <RecipesFlex key={collection.id} collection={collection} />)}
+            <ProductGrid products={products} />
         </Box>
     )
 }
